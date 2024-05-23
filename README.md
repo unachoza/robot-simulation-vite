@@ -58,3 +58,47 @@ Output: 2,4,East
 -   The source files, the test data and any test code in a git repo.
 -   [BONUS] Add some styles, or optionally use both buttons and arrow keys
 -   Timebox: Try not to spend more than 4 hours on this exercise.
+
+## Getting Started
+
+### Prerequisites
+
+You need to have Node.js and npm (Node Package Manager) installed on your system to run this project. You can download and install them from [nodejs.org](https://nodejs.org/).
+
+### Installation
+
+1. **Clone the Repository**
+
+    First, clone the repository to your local machine:
+
+    ```bash
+    git clone https://github.com/unachoza/robot-simulation-vite.git
+    cd robot-simulation-vite
+    ```
+
+2. **Install Dependencies**
+
+    Run the following command in the project directory to install the required dependencies:
+
+    ```bash
+    npm install
+    ```
+
+3. **Configuration**
+
+    No additional configuration is required for the basic functionality.
+
+## Process
+
+I chose React + TypeScript with Vite to build this app. I really like how much Typescript makes you think more deeply the code you are writing and it makes your code easier for others to read
+
+I searched for Robot png, “toy robot png front, side and back”. Using an image really looks nice and makes it obvious to the user the robot is rotating.
+
+If I had more time, I would add some error messages for the user, like some UI that said 'the robot is on the edge and you can't keep pressing move' I thought about using my Modal component, but I felt it might be too annoying / disruptive.
+
+I would also finish my validator function(currently not working / unfinished) to have a full e2e test of the app using the test data.
+
+See the live project at [this link](https://robot-simulation-vite.vercel.app/)
+The app is response to screensize changes; but when trying the deploy link, it's not always accurate on mobile. Let me know what you think !
+
+Thank you for the opportunity! I hope to continue this conversation and further discuss what I can bring to Rohirium
