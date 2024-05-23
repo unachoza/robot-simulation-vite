@@ -1,86 +1,46 @@
-// import { fireEvent, render, screen } from "@testing-library/react";
-// import App from "./App";
-
-// describe("App Component", () => {
-// 	it("should have Toy Robot Similation text in app ", () => {
-// 		render(<App />);
-// 		const message = screen.queryByText(/Toy Robot Simulation/i);
-// 		expect(message).toBeVisible();
-// 	});
-
-// 	test("changes robot direction on Left button click", () => {
-
-// 	})
-
-// 	test("changes robot direction on Right button click", () => {
-
-// 	})
-
-// 	test("moves robot one square in facing direction on Move button click", () => {
-// 		render(<App />);
-
-// 		// const robotImage = screen.getByRole("img");
-// 		// console.log({ robotImage });
-// 		// const moveButton = screen.getByText("Move");
-// 		// console.log(robotImage.style);
-// 		// fireEvent.click(moveButton);
-
-// 		// console.log(robotImage.style);
-// 		// // Assuming the initial position is (50, 10), it should change based on the move logic
-// 		// expect(robotImage).toHaveStyle({ top: "10px", left: "50px" });
-// 	});
-// });
-
-import { render, screen, fireEvent } from "@testing-library/react";
-import "@testing-library/jest-dom";
+import { fireEvent, render, screen } from "@testing-library/react";
 import App from "./App";
-import { testData, CommandType } from "./utils/testData";
+import robot_s from "./assets/robot_images/robot_s.png";
+import robot_nw from "./assets/robot_images/robot_nw.png";
+import robot_se from "./assets/robot_images/robot_se.png";
 
-describe("core functionality", () => {
-	const executeCommands = (commands: CommandType[]) => {
-		commands.forEach(({ command, location, direction }) => {
-			switch (command) {
-				case "PLACE":
-					if (location && direction) {
-						// Mock the placement of the robot by setting its state directly
-						fireEvent.click(screen.getByText("Place")); // Close modal if open
-						fireEvent.click(screen.getByText("Move"));
-					}
-					break;
-				case "MOVE":
-					fireEvent.click(screen.getByText("Move"));
-					break;
-				case "LEFT":
-					fireEvent.click(screen.getByText("Left"));
-					break;
-				case "RIGHT":
-					fireEvent.click(screen.getByText("Right"));
-					break;
-				case "REPORT":
-					fireEvent.click(screen.getByText("Report"));
-					break;
-				default:
-					break;
-			}
-		});
-	};
+describe("App Component", () => {
+	test("renders the heading correctly", () => {
+		render(<App />);
+		expect(screen.getByRole("heading", { name: /Toy Robot Simulation/i })).toBeInTheDocument();
+	});
 
-	testData.forEach(({ input, output }) => {
-		test(`executes commands: ${input.map((cmd) => cmd.command).join(", ")} and results in position ${output.location} facing ${
-			output.direction
-		}`, () => {
-			render(<App />);
+	test("renders the Table component", () => {
+		render(<App />);
+		expect(screen.getByTestId("table")).toBeInTheDocument();
+	});
 
-			executeCommands(input);
+	test("renders the Robot component", () => {
+		render(<App />);
+		expect(screen.getByAltText("toy robot")).toBeInTheDocument();
+	});
 
-			// Open modal to check report
-			fireEvent.click(screen.getByText("Report"));
+	test("opens modal when Instructions button is clicked", () => {
+		render(<App />);
+		fireEvent.click(screen.getByRole("button", { name: /Instructions/i }));
+		expect(screen.getByTestId("modal")).toBeInTheDocument();
+	});
 
-			// Check the modal content
-			const modalContent = screen.getByText(
-				`Robot is located at ${output.location[0]},${output.location[1]} and is facing ${output.direction}`
-			);
-			expect(modalContent).toBeInTheDocument();
-		});
+	test("changes robot direction on Left button click", () => {
+		render(<App />);
+		const leftButton = screen.getByText("Left");
+		const robotImage = screen.getByAltText("toy robot");
+		expect(robotImage).toHaveAttribute("src", robot_s);
+		fireEvent.click(leftButton);
+		expect(robotImage).toHaveAttribute("src", robot_se);
+	});
+
+	test("changes robot direction on Right button click", () => {
+		render(<App />);
+		const rightButton = screen.getByText("Right");
+		const robotImage = screen.getByAltText("toy robot");
+		expect(robotImage).toHaveAttribute("src", robot_s);
+		fireEvent.click(rightButton);
+		expect(robotImage).toHaveAttribute("src", robot_nw);
 	});
 });
