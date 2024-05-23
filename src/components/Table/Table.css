@@ -16,3 +16,17 @@
 .square:hover {
 	cursor: pointer;
 }
+
+@media (max-width: 867px) and (min-width: 668px) {
+	.square {
+		height: 90px;
+		width: 90px;
+	}
+}
+
+@media (max-width: 668px) {
+	.square {
+		height: 70px;
+		width: 70px;
+	}
+}

@@ -4,3 +4,15 @@
 	transition: top 1s ease, left 1s ease;
 	z-index: 10;
 }
+@media (max-width: 867px) and (min-width: 668px) {
+	.robot {
+		height: 5em;
+		padding: 0.5em;
+	}
+}
+@media (max-width: 668px) {
+	.robot {
+		height: 4em;
+		padding: 0.5em;
+	}
+}

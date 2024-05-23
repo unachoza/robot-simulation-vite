@@ -2,7 +2,6 @@
 	max-width: 1280px;
 	margin: 0 auto;
 	padding: 2rem;
-	text-align: center;
 }
 
 .app-container {
@@ -12,4 +11,9 @@
 
 .buttons-container {
 	margin: 20px;
+}
+h1 {
+	margin-left: 1rem;
+	font-size: 3.2em;
+	line-height: 1.1;
 }

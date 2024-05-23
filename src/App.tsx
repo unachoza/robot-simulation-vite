@@ -3,6 +3,7 @@ import Table from "./components/Table/Table";
 import Button from "./components/Button/Button";
 import Robot from "./components/Robot/Robot";
 import Modal from "./components/Modal/Modal";
+import useScreenSize from "./utils/useScreenSize";
 import { INITIAL_ROBOT_STATE, INSTRUCTIONS, ROBOT_IMAGE_DIRECTIONS, TABLE_SIZE } from "./utils/constants";
 import { Direction, RobotState } from "./utils/types";
 import "./App.css";
@@ -12,12 +13,29 @@ const App = () => {
 	const [isOpen, setIsOpen] = useState<boolean>(false);
 	const toggling = () => setIsOpen(!isOpen);
 	const [modalText, setModalText] = useState<string>("");
+	const { screenSize, handleResize } = useScreenSize(setRobotState);
 	const [squarePxSize, setSquarePxSize] = useState<number>(120);
 
 	const directions: Direction[] = ["north", "east", "south", "west"];
 	const tableSize: number = 5;
 
+	useEffect(() => {
+		handleResize();
+		switch (screenSize) {
+			case "L":
+				setSquarePxSize(120);
+				break;
+			case "M":
+				setSquarePxSize(90);
+				break;
+			case "S":
+				setSquarePxSize(70);
+				break;
+		}
+	}, [screenSize]);
+
 	const getRobotDirectionImage = () => {
+		console.log("called");
 		return ROBOT_IMAGE_DIRECTIONS[robotState.direction];
 	};
 
