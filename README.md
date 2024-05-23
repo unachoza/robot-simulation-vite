@@ -1,31 +1,60 @@
-# React + TypeScript + Vite
+# Toy Robot Simulator
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This application simulates a toy robot moving on a 5x5 square tabletop.
 
-Currently, two official plugins are available:
+## Description
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+-   This application simulates a toy robot moving on a 5x5 square tabletop.
+-   The tabletop has no obstructions.
+-   The robot can move freely on the tabletop but must not fall off.
+-   Clicking on a table space will PLACE the robot on the table at the clicked position
+    (using X, Y coordinates), facing north.
+-   The origin (0,0) is at the SOUTH WEST corner of the table (bottom left).
+-   The first valid command is a PLACE command. Subsequent commands can be
+    issued in any order, including another PLACE command (i.e. you can click another
+    space and it would place the original toy robot on that space).
+-   MOVE will move the toy robot one space forward in the direction it is currently
+    facing.
+-   LEFT and RIGHT will rotate the robot 90 degrees in the specified direction without
+    changing the position of the robot.
+-   REPORT will announce the X,Y position and F (facing direction) of the robot.
+-   A robot not on the table ignores commands.
+-   Commands can be issued via buttons on the page or arrow keys
+-   Provide test instructions to exercise the application.
 
-## Expanding the ESLint configuration
+## Constraints
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+-   The toy robot must not fall off the table during movement. This also includes the
+    initial placement of the toy robot. (i.e. clicking off the table should do nothing)
+-   Any move that would cause the robot to fall must be ignored.
 
-- Configure the top-level `parserOptions` property like this:
+## Example Input and Output
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+```bash
+a)
+PLACE 0,0,NORTH
+MOVE
+REPORT
+Output: 0,1,NORTH
+b)
+PLACE 0,0,NORTH
+LEFT
+REPORT
+Output: 0,0,WEST
+c)
+PLACE 1,2,North
+MOVE
+MOVE
+RIGHT
+MOVE
+REPORT
+Output: 2,4,East
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
-# robot-simulation-vite
+## Deliverables
+
+-   This can be built in any frontend framework or library that you’re comfortable
+    with. (i.e. angular, react, vue, ember, etc.)
+-   The source files, the test data and any test code in a git repo.
+-   [BONUS] Add some styles, or optionally use both buttons and arrow keys
+-   Timebox: Try not to spend more than 4 hours on this exercise.
