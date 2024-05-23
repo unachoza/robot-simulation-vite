@@ -11,7 +11,7 @@ const App = () => {
 		<>
 			<h1>Toy Robot Simulation</h1>
 			<div>
-				<Table robotState={robotState} setRobotState={setRobotState} />
+				<Table setRobotState={setRobotState} />
 			</div>
 		</>
 	);

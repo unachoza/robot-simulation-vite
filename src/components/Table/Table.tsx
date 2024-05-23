@@ -4,11 +4,10 @@ import { RobotState } from "../../utils/types";
 import { TABLE_SIZE } from "../../utils/constants";
 
 interface TableProps {
-	robotState: RobotState;
 	setRobotState: Dispatch<SetStateAction<RobotState>>;
 }
 
-const Table = ({ robotState, setRobotState }: TableProps) => {
+const Table = ({ setRobotState }: TableProps): JSX.Element => {
 	const getSquareLocationOnBrowswer = (e: MouseEvent, xPosition: number, yPosition: number) => {
 		const { x, y } = e.currentTarget.getBoundingClientRect();
 		setRobotState({ direction: "north", location: { x: xPosition, y: yPosition }, left: x, top: y });
@@ -21,7 +20,12 @@ const Table = ({ robotState, setRobotState }: TableProps) => {
 			for (let j = 0; j < columns; j++) {
 				let index = [i, j];
 				tableRow.unshift(
-					<div key={`square +${index}`} className="square" onClick={(e: MouseEvent) => getSquareLocationOnBrowswer(e, i, j)}>
+					<div
+						key={`square +${index}`}
+						data-testid={`square +${index}`}
+						className="square"
+						onClick={(e: MouseEvent) => getSquareLocationOnBrowswer(e, i, j)}
+					>
 						{index.toString()}
 					</div>
 				);
